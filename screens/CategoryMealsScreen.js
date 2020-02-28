@@ -53,10 +53,6 @@ const CategoryMealScreen = props => {
 	);
 };
 
-CategoryMealScreen.navigationOptions = navigationData => {
-	console.log(navigationData);
-};
-
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,

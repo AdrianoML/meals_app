@@ -40,7 +40,11 @@ const styles = StyleSheet.create({
 		height: 150,
 
 		borderRadius: 10,
-		overflow: "hidden"
+		//only needed in android, in ios it won't show the shadows if set to hidden
+		overflow:
+			Platform.OS === "android" && Platform.Version >= 21 ? "hidden" : "visible",
+
+		elevation: 6
 	},
 	container: {
 		flex: 1,
@@ -52,9 +56,7 @@ const styles = StyleSheet.create({
 		shadowColor: "#000",
 		shadowOpacity: 0.26,
 		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 10,
-
-		elevation: 3
+		shadowRadius: 10
 	},
 	title: {
 		fontFamily: "open-sans-bold",
