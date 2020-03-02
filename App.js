@@ -2,12 +2,23 @@ import React, { useState } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { NavigationContainer } from "@react-navigation/native";
-
 import { enableScreens } from "react-native-screens";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+
 import Navigator from "./navigation/Navigator";
+import mealsReducer from "./store/reducers/meals";
 
 // for performance efficiency
 enableScreens();
+
+// Redux Storage
+const rootReducer = combineReducers({
+	meals: mealsReducer
+});
+
+const store = createStore(rootReducer);
+///
 
 const fetchFonts = () => {
 	return Font.loadAsync({
@@ -26,8 +37,11 @@ export default function App() {
 		);
 
 	return (
-		<NavigationContainer>
-			<Navigator />
-		</NavigationContainer>
+		// Provider needs to wrap the entire app in order to redux work, well, globally of course
+		<Provider store={store}>
+			<NavigationContainer>
+				<Navigator />
+			</NavigationContainer>
+		</Provider>
 	);
 }
